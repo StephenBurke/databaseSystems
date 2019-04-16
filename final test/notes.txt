@@ -130,3 +130,195 @@ While statement
     </body> 
 </html> 
 
+Arrays in PHP
+    Three types of arrays
+    Numeric Array: An array with a numeric index
+    Associative Array: An array where each index is associated with a value (string)
+    Multidimensional Array: An array containing one or more arrays
+    *Multidimensional Arrays are beyond the scope of this course and will not be discussed
+Numeric Arrays
+    Stores each element with numeric ID index
+    Different ways to create numeric arrays:
+
+    Example 1
+	    $names = array(“Peter”, ”Quagmire”, ”Joe”);
+
+        Index   Value 
+        0       Peter
+        1       Quagmire 
+        2       Joe 
+
+    Example 2
+        $names[0] = “Peter”;
+ 	    $names[1] = “Quagmire”;
+	    $names[2] = “Joe”;
+
+        Index   Value 
+        0       Peter
+        1       Quagmire 
+        2       Joe 
+
+    Example
+    <?php
+        $names[0] = "Peter";
+        $names[1] = "Quagmire";
+        $names[2] = "Joe";
+        echo $names[1] . " and " . $names[2] . " are ". $names[0] . "'s neighbors";
+    ?> 
+    Code above will output
+    Quagmire and Joe are Peter’s neighbors
+
+Associative Arrays
+    Each ID is associated with a value (string)
+    Used when storing data about specific named values
+    Can use values as indexes and assign values to them
+    Two different ways to create this type of array
+    Example 1
+	    $ages = array(“Peter”=>32, “Quagmire”=>30, “Joe”=>34);
+    Example 2
+        $ages[‘Peter’]=“32”;
+        $ages[‘Quagmire’]=“30”;
+        $ages[‘Joe’]=“34”;
+    Both arrays will contain the contents below
+
+        Index       Value 
+        Peter       32
+        Quagmire    30
+        Joe         34
+    Example:
+        <?php
+            $ages['Peter'] = "32";
+            $ages['Quagmire'] = "30";
+            $ages['Joe'] = "34";
+            echo "Peter is " . $ages['Peter'] . " years old.";
+        ?> 
+    The code above will output:
+    Peter is 32 years old
+PHP Formas and User Input
+    Any form element in an HTML page is automatically available to PHP script
+    The next example is an HTML page that contains two input fields and a submit button
+    When user clicks on submit button, the form data is sent to “welcome.php”
+<html>
+	<body>
+        <form action="welcome.php" method="post">
+            Name: <input type="text" name="name" /> 
+            Age: <input type="text" name="age" />
+            <input type="submit" /> 
+        </form>
+	</body>
+</html> 
+
+$_GET and $_POST variables are used to retrieve information from forms. More is discussed in later slides
+
+<html>
+    <body>
+        Welcome 
+        <?php 
+            echo $_POST["name"]; 
+        ?>.<br />
+        You are 
+        <?php 
+            echo $_POST["age"]; 
+        ?> years old.
+    </body>
+</html> 
+
+A sample output of the script on the previous slide may be:
+	Welcome John.
+	You are 28 years old. 
+
+$_GET   
+    An array of variable names and values sent by the HTTP GET method
+    Information sent from a form with the GET method is visible to everyone in the browser’s address bar
+    Only a maximum of 100 characters can be send using the GET method
+    GET method should not be used when sending passwords or other sensitive information
+    Can bookmark the page i.e. can save the URL of the current web page, as the form data is attached to the URL address
+    Example:
+<form action="welcome.php" method="get">
+	Name: <input type="text" name="name" />
+	Age: <input type="text" name="age" />
+	<input type="submit" />
+</form> 
+    When user clicks the submit button, URL looks like this
+    http://localhost/welcome.php?name=Peter&age=37 
+
+    Welcome.php can now use $_GET variable to catch the form data from the form which was discussed in the previous 
+    Welcome 
+    <?php 
+        echo $_GET["name"]; 
+    ?>.<br />
+    You are 
+    <?php 
+        echo $_GET["age"]; 
+    ?> years old!
+
+    If the user enters “Peter” as name and “37” as age, following will be the output:
+	Welcome Peter.
+	You are 37 years old!
+    Note that the names of the form fields are the ID keys in $_GET array
+
+$_POST
+    An array of variable names and values sent by the HTTP POST method
+    Information sent using HTTP POST method is invisible to others
+    Has no limit on information to send
+    Cannot bookmark the page i.e. if you copy the URL of the current page and try to open in another web browser, you will not get the same page, because the form data is not attached to the URL
+    Example:
+<form action="welcome.php" method="post">
+	Enter your name: <input type="text" name="name" />
+	Enter your age: <input type="text" name="age" />
+	<input type="submit" />
+</form>
+    When user clicks on submit button, URL does not show any form data. URL looks like this
+	http://localhost/welcome.php 
+
+    welcome.php
+    Welcome <?php echo $_POST["name"]; ?>.<br />
+    You are <?php echo $_POST["age"]; ?> years old! 
+    welcome.php can now use the $_POST variable to catch the form data from the form discussed in the previous slide
+    Note that the names of the form fields are the ID keys in the $_POST array
+
+Querying a Database from the web
+    Five basic steps to access a database from the web using php
+        Check and filter data coming from the user
+        Set up a connection to the appropriate database
+        Query the database
+        Retrieve the results
+        Present the results back to the user
+Querying the Database Example
+    User enters the title of the book to check whether the book is available for checkout or not
+    If the book is available for checkout, user will get a message saying it is available
+    If the book has been checked out, user gets a message saying who checked out the book
+    If the book does not exist in the database, user gets appropriate message
+    
+    Booksearch.html
+
+<html> 
+	<head>  
+		<title>Book Search Page</title> </head> 
+	<body>  
+	<form action="results.php" method="post">    
+		Enter the title of the book to look for:<br />    
+		<input name="booktitle" type="text“ />  <br />    	
+        <input type="submit" value="Search“ />   
+	</form> 
+	</body>
+</html> 
+
+Check and filter data coming from the user
+    $booktitle = $_POST['booktitle'];
+	if($booktitle == "")
+	{		
+		echo "Textbox can not be empty. Please enter a 	book title.";
+		exit;
+	} 
+    The code above uses $_POST array to retrieve the form data, because the form uses HTTP POST method to send data. It then checks if the user has entered some text. If no text is entered the error message is displayed and no further code is executed
+Setup a connection to the appropriate database
+    $con = mysqli_connect('localhost','root','','books');  
+	if(!$con)   
+	{   	
+		echo "Error connecting to database: ".mysqli_error(); 
+		exit;  
+	} 
+    mysqli_connect() function is used to connect to a database and it takes four parameters: server name, username, password and database name
+    If the connection fails appropriate error message is displayed
+    mysqli_error() function returns the error message returned by the PHP engine
