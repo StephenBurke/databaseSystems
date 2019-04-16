@@ -1,1 +1,132 @@
-hello world
+Introduction to PHP
+    PHP: Hyprtext PreProcessor
+    Server side scripting language
+    open source
+PHP File
+    May contain text, HTML tags and scripts
+    Returned to the browser as HTML
+    Have .php, .php3 or .phtml extension
+Advantages of PHP
+    Platform independent
+    Compatible with almost all servers
+    Free to download (www.php.net)
+    Easy to learn
+    Runs efficiently
+Basic PHP Syntax
+    PHP scripting starts with <?php and ends with ?>
+	<?php
+
+	?>
+    Can be placed anywhere in the document
+    Can have multiple PHP tags in a document
+    PHP file contains HTML tags and PHP scripting code
+Hello World PHP script:
+
+<html>
+    <body>
+        <?php
+            echo "Hello World";
+        ?>
+    </body>
+</html> 
+
+echo and Example
+    echo outputs one or more strings
+    Example0:
+	    echo “Hello World”;
+
+	Output0: 
+	    Hello World
+
+    Example1:
+	    echo “This spans
+	    multiple lines. The new lines will be
+	    output as well.”;
+	
+	Output1:
+	    This spans
+	    multiple lines. The new lines will be
+	    output as well.
+Comments in PHP
+    // -Single line Comments
+    Example:
+        //This is a single line comment
+
+        /*   */ - Block comment
+    Example:
+        /*
+        This is a 
+        block comment
+        */
+Variables in PHP
+    All variables start with $ sign symbol
+    Assignment statement syntax
+        $varname = value or expression;
+    Example:
+        <?php
+            $txt = "Hello World!";
+            $number = 16;
+        ?> 
+Loosely Typed Language
+    In strongly typed language such as Java, variables are declared before being used
+    PHP is a loosely typed language
+    Variables need not be declared and are declared when used
+    Automatically converts the contents of variable to the correct data type
+
+Concatenation Operator
+    Only one string concatentation operator in PHP
+    Concatenation operator (.) is used to concatenate two strings
+    Example
+        <?php
+            $txt1 = "Hello World";
+            $txt2 = "1234";
+            echo $txt1 . " " . $txt2;
+        ?> 
+    Output:
+        Hello World 1234
+if...else statement
+    The if..else statement usage checks a condition 
+        executes the first group of statements if the condition is true 
+        otherwise executes the second group of statements if the condition is false. 
+    Syntax:
+        if (condition) 
+            code to be executed if condition is true; 
+        else 
+            code to be executed if condition is false; 
+    Example:
+<html>
+    <body>
+        <?php 
+            $x = 20; 
+            $y = 10;
+            if ($x > $y) 
+                echo "First value is greater than second"; 
+            else 
+                echo "First value is smaller than second"; 
+        ?>
+    </body> 
+</html> 
+    The code will output 
+    "First value is greater than second"
+    if the value in variable $x is greater than $y
+    "First value is smaller than second"
+    If the value in variable $y is less than or equal to $x
+While statement
+    The while statement will execute a block of code if and as long as a condition is true.
+    Syntax:
+        while (condition){
+            code to be executed;
+        }
+   Example:
+<html>
+    <body>
+        <?php
+            $i = 1; 
+            while ($i <= 5){ 
+                echo "The number is " . $i . "<br />"; 
+                $i++; 
+            } 
+        ?>
+    </body> 
+</html> 
+
