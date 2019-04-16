@@ -1,0 +1,64 @@
+SQL Standard Benefits
+    Enable portability between systems
+    Reduced traingin costs
+    Productivity
+    Application longevity
+    Reduced dependence on a single vendor
+    Cross-system communication
+SQL Environment
+    Catalog
+        A set of schemas that constitute the description of a database
+    Schema
+        The structure that contains descriptions of objects created by a
+        user(base tables, views, constraints)
+    Data Definition Language (DDL)
+        Commands that define a database, including creating, altering, and 
+        dropping tables and establishing constraints
+    Data Manipulation Language (DML)
+        Commands taht maintain and query a database
+    Data Control Language (DCL)
+        Commands taht control a database, including administering privileges and committing Data
+Types of Commands
+    data definition language(DDL)
+        used to create, alter, and drop tables
+    data manipulation language(DML)
+        used to update, insert, modify, and query
+    data control language (DCL)
+        used by the DBA to grant or revoke privileges, for example
+SQL Character Data Types
+    CHAR(n)
+        fixed-length character data, n characters long; maximum value for n is 2000
+            Example: assume firstName is of type CHAR(30); if "Sue" is stored in firstName, it will be padded with 27 blanks to create a string of length 30
+    VARCHAR2 (n)
+        variable-length character data; maximum size if 4000 bytes
+    use CHAR only for fixed-length character ields (like social security numbers and zip codes, for example)
+    use VARCHAR2 for variable-length character fields (like names of people, for example)
+SQL DDL Commands
+    typical DDL commands available include 
+        CREATE TABLE 
+        DROP TABLE 
+        ALTER TABLE
+SQL Database Definition
+    Major CREATE statements:
+        CREATE SCHEMA
+            defines a portion of the database owned by a particular userk
+        CREATE TABLE
+            defines a new table and its columns
+        CREATE VIEW 
+            defines a logical table from one or more tables or views
+    Other CREATE statements: CHARACTER SET, COLLATION, TRANSLATION, ASSERTION, DOMAIN
+Steps in Table Creation
+    1. Identify data types for attributes
+    2. Identify columns that can and cannot be null
+    3. Identify columns that must be unique (candidate keys)
+    4. Identify primary key-forwign key mates
+    5. Determine default values
+    6. Identify constraints on columns (domain specifications)
+    7. Create the table and associated indexes
+Data Integrity Controls
+    Referential Integrity
+        constraint that ensures taht foregn key values of a table must match primary key values of a related table in 1:M relationships
+    Restricting:
+        Deletes of primary records
+        Updates of primary records
+        Inserts of dependent records

@@ -1,0 +1,8 @@
+Properties of Relations
+    each relation in a database has a unique name
+    each column(attribute) has a unique name
+    there are no multivalued attributes in a relation
+    each row in a relation is unique
+    the ordring of the rows and colums is insignigicant
+Primary Key
+    an attribute (or com)

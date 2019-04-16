@@ -1,0 +1,139 @@
+Chapter 4
+
+Definitions
+    Entity integrity
+        No primary key atribute can be null
+    Referential integrity
+        A foreign key value (in the relation on the many side) MUST match a primary key value in the relation on the one side, or be null
+    Relation
+        a named, two-dimensional table of data, consisting of 
+            a set of named columns (attributes)
+            an arbitrary number of unnamed rows
+    Candidate keys
+        A collection of attributes that satisfies the requirements for a primary key is called a candidate key
+        If there is more than one candidate key, then the developer must pick one and designate it as teh primary key
+        In our definitions for normal forms, unless otherwise stated, we will assume there is only one candidate key
+    Primary key
+        An attribute (or combination of attributes) that uniquely identifies each row in a relation
+        A primary key that consists of more than one attribute is called a composite key
+        The primary key components cannnot be null; this is called entity integrity
+        In a relation R, an attribute, or collection of attributes, A, is the primary key of a relation if
+            All attributes in R are functionally dependent on A
+            No subcollection of the attributes in A also has the above property
+    Foreign key
+        Foreign keys are used to represent relationships between two relations R1 and R2
+        A foreign key consists of one or more attributes in R2
+        A foreign key enables a dependent relation (on the many side of a relationship) to refer to its parent (on the one side of the relationship)
+    Determinants
+        In a functional dependency, the attributes on the left hand side of the arrow are called determinants
+        A primary key is always a determinant, but a determinant is not necessarily a primary key
+        All attributes are functionally dependent on the primary key; i.e., the primary key determines all attributes
+    Functional dependency
+        In a relation R, an attribute B is functionally dependent on an attribute, or collection of attributes, A, if every valid instance of A uniquely determines the value of B
+        We denote this as A->B 
+
+    Transitive dependency
+        A functional dependency between two (or more) nonkey attributes
+    Normalization
+        The normalization process generally results in a well-structured relation
+        There are six normal forms, called first, second, third, Boyce/Codd, fourth, and fifth normal forms
+        We will study first, second, and third normal forms
+    Non-loss decomposition
+        One goal of any decomposition is that is be a non-loss decomposition
+        This means a join operation should restore the original information
+    1NF
+        A relation is in 1NF if all multivalued attributes (repeating groups) have been removed
+        this is somewhat of a contradiction in terminology, because a relation, by definition, cannot contain a repeating group
+    2NF
+        An attribute is a nonkey attribute if it is not a part of teh primary key
+        A relation is in 2NF if 
+            It is in 1NF and
+            No nonkey attribute is dependent on only a portion of the primary key; that is, there are no partial dependency
+    3NF
+        A relation is in third normal form if
+            It is in 2NF and
+            No transitive dependencies exist
+Know how to convert a relation into: 1NF, 2NF, 3NF
+    To convert from 1NF to 2Nf
+        For each subset of the set of attributes that make up the primary key, begin a relation with this wubset as its primary key
+        Place each of the other attributes with the minimal collection on which it depends
+        If there is a subset on which another attribute depends, descard it unless it is the collection making up the original primary key- NEVER discard the original primary key
+    To convert from 2NF to 3NF
+        For each transitive dependency, remove the dependent attributes and place them in a separate relation
+        Place the attributes that determined the dependent attributess into the new relation also, but do not remove these attributes from the original relation; these attributes ate the primary key of the new relation
+
+You may want to review the following worksheets (Chapter4a, Chapter4B, chapter4C) Especially review Chapter4C. This worksheet includes a coprehensive look at normalization for all the entites and special situations. Be prepared to conver a large ER diagram problem into a normalized relation. (Review Chapter4E) This problem will be similat to your Exam 2 written problem
+
+Chapter 5
+
+Volume and usage statistics (Ch0501VolumeStats.doc)
+    Data volume and usage statistics can be included in an E-R diagram
+How do we handle missing data?
+    Substitute an estimate of the missing value (e.g., using a formula)
+    Construct a report listing missing values
+    In programs, ignore missing data unless the value is significant (sensitivity testing)
+Denormalization (Review Chapter5B and ch0503Denormalization.doc)
+    Transforming normalized relations into non-normalized physical recod specifications
+    Benefits:
+        Can improve performance (speed) by reducing number of table lookup (i.e. reduce  number of necessary join queries)
+    Costs (due to data duplication)
+        Wasted storage space
+        Data integrity/consistency threats
+    Common denormalization opportunities
+        One-to-one relationship
+        Many-to-many relationship with non-key attributes (associative entity)
+        Reference data (1:N relationship where 1-side has data not used in any other relationship)
+    Denormalization can
+        Increase chance of erros and inconsistencies 
+        Reintroduce anomalies
+        Force reprogramming when business rules change
+    Perhaps other methods could be used to improve performance of joins
+        Organization of tables in the database (file organization and clustering) 
+        Proper qury design and optimization
+
+Horizontal and Vertical Partition (ch05partitioning.doc)
+    Horizontal Partitioning: 
+        Distributing the rows of a logical relation into several separate tables 
+            Useful for situations where different users need access to different rows
+    Vertical Partitioning:
+        Distributing the columns of a logical relation into several separate physical tables 
+            Useful for situations where different users need access to different columns
+            The primary key must be repeated in each file
+    Partitioning pros and cons
+        Advantages of Partitioning:
+            Efficiency: 
+                Records used together are grouped together
+            Local optimization:
+                Each partition can be optimized for performance
+            Security: 
+                Data not relevant to users are segregated 
+            Recovery and uptime: 
+                Smaller files take less time to back up
+            Load balancing:
+                Partitions stored on different disks, reduces contention
+        Disadcantages of Partitioning:
+            Inconsistent access speed:  
+                Slow retrievals across partitions
+            Complexity: 
+                Non-transparent partitioning
+            Extra space or updata time:
+                Duplicate data; access from multiple partitions
+
+How do we handle indexed files? (Chapter5C)
+    Indexed Files 
+        In an indexed file, records may be stored sequentially or nonsequentially
+        Indexes ate created to allow for easy access to individual records
+        An index can point to a single record or to a group of records
+    Indexes and Primary keys 
+        A DBMS normally automatically creates an index based on the primary key, as shown in the previous slide
+        In addition the developer can designate other indexes to be created
+    Using Indexes 
+        Indexes can speed up retrieval of records, and therefore are desirable if the database is primarily used for retrieval
+        Indexes degrade performance for insertions, deletions, and updates
+        For databases requiring frequent updates, use indexes judiciously
+    When to use indexes 
+        Indexes are most useful on larger tables
+        Primary keys should always be indexed
+        Columns that appear frequently in WHERE clauses in SQL commands may need to be indexed
+        Attributes referenced by ORDER BY and GROUP BY clauses may need to be indexed
+        
