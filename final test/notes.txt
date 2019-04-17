@@ -322,3 +322,40 @@ Setup a connection to the appropriate database
     mysqli_connect() function is used to connect to a database and it takes four parameters: server name, username, password and database name
     If the connection fails appropriate error message is displayed
     mysqli_error() function returns the error message returned by the PHP engine
+Query the database  
+    $query = "select title from tblbooks where title='".$booktitle."'"; 
+  	$result = mysqli_query($con,$query);
+	$query = "select title,lastname,firstname 
+	from tblbooks,tblpatrons 
+	where tblbooks.checkedoutto=tblpatrons.ssn 
+	and title='".$booktitle."'";   
+	$result = mysqli_query($con,$query); 
+    mysqli_query() function is used to execute the query. It takes two parameters: connection to the database and the query to be executed
+    It returns the results of the query
+    Multiple queries can be written in a PHP script
+
+Retrieve and present the results back to the user   
+    $numrows = mysqli_num_rows($result); 
+	if($numrows == 0)   
+	{	
+		echo "Book titled ".$booktitle." does not 	exist in the database.";	
+		exit;   
+	}
+	
+	$numrows = mysqli_num_rows($result);   
+	if($numrows == 0)   
+	{	
+        echo $booktitle." is available for 	checkout.";	
+		exit;   
+	}   
+	while($row = mysqli_fetch_array($result))   
+	{
+		echo "The book titled ".$row['title']." has 	been checked out by ".$row['firstname']." 	".$row['lastname'].".";   
+	} 
+In the above code mysqli_num_rows() function takes the results returned by the query as parameter and returns the number of rows that are there in the results
+This function can be used to check if the query returned any results or not. If no rows are returned then appropriate message is displayed
+In our example if the number of rows is zero, then the book does not exist in the database and no further code is executed
+mysqli_fetch_array() function takes the results as parameter and returns a row from these results in the form of an array
+Values of the row can be obtained by giving the column name as the index value as shown in the example above
+
+
